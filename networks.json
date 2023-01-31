@@ -1,0 +1,7 @@
+{
+  "goerli": {
+    "ContinuousRentalAuctionFactory": {
+      "address": "0xDE82012B72fD98A76c6f920b44537D3B5EB0728D"
+    }
+  }
+}

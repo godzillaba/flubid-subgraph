@@ -1,0 +1,18 @@
+type ContinuousRentalAuctionDeployed @entity(immutable: true) {
+  id: Bytes!
+  auctionAddress: Bytes! # address
+  controllerObserverAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RentalAuctionControllerObserverDeployed @entity(immutable: true) {
+  id: Bytes!
+  controllerObserverImplementation: Bytes! # address
+  controllerObserverAddress: Bytes! # address
+  auctionAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

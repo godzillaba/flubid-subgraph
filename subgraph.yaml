@@ -1,0 +1,26 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ContinuousRentalAuctionFactory
+    network: goerli
+    source:
+      address: "0xDE82012B72fD98A76c6f920b44537D3B5EB0728D"
+      abi: ContinuousRentalAuctionFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ContinuousRentalAuctionDeployed
+        - RentalAuctionControllerObserverDeployed
+      abis:
+        - name: ContinuousRentalAuctionFactory
+          file: ./abis/ContinuousRentalAuctionFactory.json
+      eventHandlers:
+        - event: ContinuousRentalAuctionDeployed(indexed address,indexed address)
+          handler: handleContinuousRentalAuctionDeployed
+        - event: RentalAuctionControllerObserverDeployed(indexed address,indexed address,indexed address)
+          handler: handleRentalAuctionControllerObserverDeployed
+      file: ./src/continuous-rental-auction-factory.ts
