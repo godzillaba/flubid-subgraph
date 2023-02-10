@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: ContinuousRentalAuctionFactory
@@ -17,12 +17,11 @@ dataSources:
         - ContinuousRentalAuctionFactory
       abis:
         - name: ContinuousRentalAuctionFactory
-          file: ./abis/ContinuousRentalAuctionFactory.json
+          file: ContinuousRentalAuctionFactory/abis/ContinuousRentalAuctionFactory.json
       eventHandlers:
         - event: ContinuousRentalAuctionDeployed(indexed address,indexed address,indexed address)
           handler: handleContinuousRentalAuctionDeployed
-      file: ./src/continuous-rental-auction-factory.ts
-
+      file: ContinuousRentalAuctionFactory/ContinuousRentalAuctionFactory.wasm
 templates:
   - name: ContinuousRentalAuction
     kind: ethereum/contract
@@ -33,12 +32,12 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/continuous-rental-auction.ts
+      file: templates/ContinuousRentalAuction/ContinuousRentalAuction.wasm
       entities:
         - ContinuousRentalAuction
       abis:
         - name: ContinuousRentalAuction
-          file: ./abis/ContinuousRentalAuction.json
+          file: ContinuousRentalAuction/abis/ContinuousRentalAuction.json
       eventHandlers:
         - event: Initialized(indexed address,indexed address,indexed address,uint96,int96)
           handler: handleInitialized
@@ -50,7 +49,6 @@ templates:
           handler: handleStreamUpdated
         - event: StreamTerminated(indexed address)
           handler: handleStreamTerminated
-
   - name: LensProfileControllerObserver
     kind: ethereum/contract
     network: mumbai
@@ -60,12 +58,12 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/continuous-rental-auction.ts
+      file: templates/ContinuousRentalAuction/ContinuousRentalAuction.wasm
       entities:
         - LensProfileControllerObserver
       abis:
         - name: LensProfileControllerObserver
-          file: ./abis/LensProfileControllerObserver.json
+          file: LensProfileControllerObserver/abis/LensProfileControllerObserver.json
       eventHandlers:
         - event: AuctionStopped()
           handler: handleAuctionStopped

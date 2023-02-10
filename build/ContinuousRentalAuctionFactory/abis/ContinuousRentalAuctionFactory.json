@@ -1,0 +1,92 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_host",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_cfa",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "auctionAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "controllerObserverAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "controllerObserverImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "ContinuousRentalAuctionDeployed",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISuperToken",
+        "name": "_acceptedToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_controllerObserverImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_beneficiary",
+        "type": "address"
+      },
+      {
+        "internalType": "uint96",
+        "name": "_minimumBidFactorWad",
+        "type": "uint96"
+      },
+      {
+        "internalType": "int96",
+        "name": "_reserveRate",
+        "type": "int96"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_controllerObserverExtraArgs",
+        "type": "bytes"
+      }
+    ],
+    "name": "create",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "auctionClone",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "controllerObserverClone",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
