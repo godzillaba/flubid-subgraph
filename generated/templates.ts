@@ -20,6 +20,20 @@ export class ContinuousRentalAuction extends DataSourceTemplate {
   }
 }
 
+export class EnglishRentalAuction extends DataSourceTemplate {
+  static create(address: Address): void {
+    DataSourceTemplate.create("EnglishRentalAuction", [address.toHex()]);
+  }
+
+  static createWithContext(address: Address, context: DataSourceContext): void {
+    DataSourceTemplate.createWithContext(
+      "EnglishRentalAuction",
+      [address.toHex()],
+      context
+    );
+  }
+}
+
 export class LensProfileControllerObserver extends DataSourceTemplate {
   static create(address: Address): void {
     DataSourceTemplate.create("LensProfileControllerObserver", [

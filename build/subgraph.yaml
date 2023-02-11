@@ -22,6 +22,26 @@ dataSources:
         - event: ContinuousRentalAuctionDeployed(indexed address,indexed address,indexed address)
           handler: handleContinuousRentalAuctionDeployed
       file: ContinuousRentalAuctionFactory/ContinuousRentalAuctionFactory.wasm
+  - kind: ethereum
+    name: EnglishRentalAuctionFactory
+    network: mumbai
+    source:
+      address: "0x9116FF8B1b18b65F1d5A711c174C40089109B6a4"
+      abi: EnglishRentalAuctionFactory
+      startBlock: 31700000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - EnglishRentalAuctionFactory
+      abis:
+        - name: EnglishRentalAuctionFactory
+          file: EnglishRentalAuctionFactory/abis/EnglishRentalAuctionFactory.json
+      eventHandlers:
+        - event: EnglishRentalAuctionDeployed(indexed address,indexed address,indexed address)
+          handler: handleEnglishRentalAuctionDeployed
+      file: EnglishRentalAuctionFactory/EnglishRentalAuctionFactory.wasm
 templates:
   - name: ContinuousRentalAuction
     kind: ethereum/contract
@@ -49,6 +69,24 @@ templates:
           handler: handleStreamUpdated
         - event: StreamTerminated(indexed address)
           handler: handleStreamTerminated
+  - name: EnglishRentalAuction
+    kind: ethereum/contract
+    network: mumbai
+    source:
+      abi: EnglishRentalAuction
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: templates/EnglishRentalAuction/EnglishRentalAuction.wasm
+      entities:
+        - EnglishRentalAuction
+      abis:
+        - name: EnglishRentalAuction
+          file: EnglishRentalAuction/abis/EnglishRentalAuction.json
+      eventHandlers:
+        - event: Initialized(address,address,address,uint96,int96,uint64,uint64,uint64,uint64)
+          handler: handleInitialized
   - name: LensProfileControllerObserver
     kind: ethereum/contract
     network: mumbai

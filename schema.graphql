@@ -63,6 +63,27 @@ type ContinuousRentalAuction @entity(immutable: false) {
   # paused: Boolean!
 }
 
+type EnglishRentalAuction @entity(immutable: false) {
+  id: Bytes! # address
+
+  ## Constants
+  controllerObserverImplementation: Bytes! # address
+  controllerObserver: Bytes! # address
+
+  acceptedToken: Bytes # address
+  beneficiary: Bytes # address
+  minimumBidFactorWad: BigInt
+  reserveRate: BigInt
+
+  minRentalDuration: BigInt
+  maxRentalDuration: BigInt
+  biddingPhaseDuration: BigInt
+  biddingPhaseExtensionDuration: BigInt
+
+  ## Non constants
+  currentRenter: Bytes # address
+}
+
 # type RentalAuctionControllerObserver @entity(immutable: true) {
 #   id: Bytes! # address
 #   type: String
