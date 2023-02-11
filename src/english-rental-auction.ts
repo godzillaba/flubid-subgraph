@@ -4,18 +4,17 @@
 // } from "../generated/ContinuousRentalAuctionFactory/ContinuousRentalAuctionFactory"
 // import { ContinuousRentalAuction, Stream, StreamHistory } from "../generated/schema";
 
-import { EnglishRentalAuction } from "../generated/schema";
+import { BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
+import { EnglishRentalAuction, RentalAuction } from "../generated/schema";
+
 
 import {
   Initialized as InitializedEvent,
 } from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction";
-
-// function createId(prefix: string, txHash: Bytes, logIndex: BigInt): Bytes {
-//   return Bytes.fromUTF8(prefix).concat(txHash.concat(Bytes.fromHexString(logIndex.toHex())));
-// }
+import { createIdFromAddress } from "./helpers";
 
 export function handleInitialized(event: InitializedEvent): void {
-  const entity = new EnglishRentalAuction(event.address);
+  const entity = new EnglishRentalAuction(createIdFromAddress("EnglishRentalAuction", event.address));
   entity.acceptedToken = event.params.acceptedToken;
   entity.beneficiary = event.params.beneficiary;
   entity.minimumBidFactorWad = event.params.minimumBidFactorWad;
@@ -27,4 +26,9 @@ export function handleInitialized(event: InitializedEvent): void {
   entity.biddingPhaseExtensionDuration = event.params.biddingPhaseExtensionDuration;
 
   entity.save();
+
+
+  // const genericEntity = new RentalAuction(createIdFromAddress("RentalAuction", event.address));
+  // genericEntity.type = "english";
+  // genericEntity.save();
 }

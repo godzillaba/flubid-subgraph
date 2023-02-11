@@ -11,13 +11,14 @@ import {
   StreamUpdated as StreamUpdatedEvent,
   StreamTerminated as StreamTerminatedEvent
 } from "../generated/templates/ContinuousRentalAuction/ContinuousRentalAuction";
+import { createIdFromAddress } from "./helpers";
 
 function createId(prefix: string, txHash: Bytes, logIndex: BigInt): Bytes {
   return Bytes.fromUTF8(prefix).concat(txHash.concat(Bytes.fromHexString(logIndex.toHex())));
 }
 
 export function handleInitialized(event: InitializedEvent): void {
-  const entity = new ContinuousRentalAuction(event.address);
+  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
   entity.acceptedToken = event.params.acceptedToken;
   entity.beneficiary = event.params.beneficiary;
   entity.minimumBidFactorWad = event.params.minimumBidFactorWad;
@@ -26,14 +27,14 @@ export function handleInitialized(event: InitializedEvent): void {
 }
 
 export function handleRenterChanged(event: RenterChangedEvent): void {
-  const entity = new ContinuousRentalAuction(event.address);
+  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
 
   entity.currentRenter = event.params.newRenter;
 
   entity.save();
 }
 export function handleNewInboundStream(event: NewInboundStreamEvent): void {
-  const entity = new ContinuousRentalAuction(event.address);
+  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
 
   // entity.currentRenter = event.params.newRenter;
   // const streamId = event.params.streamer.concat(event.address);
@@ -66,7 +67,7 @@ export function handleNewInboundStream(event: NewInboundStreamEvent): void {
 }
 
 export function handleStreamUpdated(event: StreamUpdatedEvent): void {
-  const entity = new ContinuousRentalAuction(event.address);
+  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
 
   // find the stream in the inboundStreams array to update
   let inboundStreams = entity.inboundStreams;
@@ -95,7 +96,7 @@ export function handleStreamUpdated(event: StreamUpdatedEvent): void {
   streamHistoryEntity.save();
 }
 export function handleStreamTerminated(event: StreamTerminatedEvent): void {
-  const entity = new ContinuousRentalAuction(event.address);
+  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
 
   let inboundStreams = entity.inboundStreams;
   if (inboundStreams === null) inboundStreams = [];
