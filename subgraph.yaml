@@ -20,6 +20,8 @@ dataSources:
           file: ./abis/ContinuousRentalAuctionFactory.json
         - name: IRentalAuctionControllerObserver
           file: ./abis/IRentalAuctionControllerObserver.json
+        - name: ContinuousRentalAuction
+          file: ./abis/ContinuousRentalAuction.json
         - name: ERC4907Metadata
           file: ./abis/ERC4907Metadata.json
       eventHandlers:
@@ -43,6 +45,12 @@ dataSources:
       abis:
         - name: EnglishRentalAuctionFactory
           file: ./abis/EnglishRentalAuctionFactory.json
+        - name: IRentalAuctionControllerObserver
+          file: ./abis/IRentalAuctionControllerObserver.json
+        - name: EnglishRentalAuction
+          file: ./abis/EnglishRentalAuction.json
+        - name: ERC4907Metadata
+          file: ./abis/ERC4907Metadata.json
       eventHandlers:
         - event: EnglishRentalAuctionDeployed(indexed address,indexed address,indexed address)
           handler: handleEnglishRentalAuctionDeployed

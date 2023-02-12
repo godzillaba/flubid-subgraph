@@ -49,67 +49,83 @@ type ContinuousRentalAuction @entity(immutable: false) {
 
   address: Bytes!
 
-  controllerObserverImplementation: Bytes! # address
-  controllerObserver: Bytes! # address
+  # controllerObserverImplementation: Bytes! # address
+  # controllerObserver: Bytes! # address
 
-  acceptedToken: Bytes # address
-  beneficiary: Bytes # address
-  minimumBidFactorWad: BigInt
-  reserveRate: BigInt
+  # acceptedToken: Bytes # address
+  # beneficiary: Bytes # address
+  # minimumBidFactorWad: BigInt
+  # reserveRate: BigInt
 
-  currentRenter: Bytes # address
+  # currentRenter: Bytes # address
   
-  inboundStreams: [Stream!]
-  # userInfo: [UserInfo!]
-  # currentWinner: Bytes! # address
-  # paused: Boolean!
+  # continuous specific non constants
+  inboundStreams: [Stream!]!
 }
 
 type EnglishRentalAuction @entity(immutable: false) {
   # todo: paused?
   id: Bytes!
-
   address: Bytes!
 
   ## Constants
-  controllerObserverImplementation: Bytes! # address
-  controllerObserver: Bytes! # address
+  # controllerObserverImplementation: Bytes! # address
+  # controllerObserver: Bytes! # address
 
-  acceptedToken: Bytes # address
-  beneficiary: Bytes # address
-  minimumBidFactorWad: BigInt
-  reserveRate: BigInt
+  # acceptedToken: Bytes # address
+  # beneficiary: Bytes # address
+  # minimumBidFactorWad: BigInt
+  # reserveRate: BigInt
 
-  minRentalDuration: BigInt
-  maxRentalDuration: BigInt
-  biddingPhaseDuration: BigInt
-  biddingPhaseExtensionDuration: BigInt
+  # English specific constants
+  minRentalDuration: BigInt!
+  maxRentalDuration: BigInt!
+  biddingPhaseDuration: BigInt!
+  biddingPhaseExtensionDuration: BigInt!
 
-  ## Non constants
-  currentRenter: Bytes # address
+  # English specific non constants
+  # todo phase info
 }
 
-type RentalAuction @entity(immutable: false) {
+type GenericControllerObserver @entity(immutable: false) {
+  id: Bytes! # address based
+  address: Bytes!
+  implementation: Bytes! # address
+  auctionAddress: Bytes! # address
+
+  underlyingTokenContract: Bytes!
+  underlyingTokenID: BigInt!
+
+  underlyingTokenName: String!
+  underlyingTokenURI: String!
+}
+
+type GenericRentalAuction @entity(immutable: false) {
   id: Bytes! 
   type: String!
   address: Bytes! # address
 
   ## Constants
   controllerObserverImplementation: Bytes! # address
-  controllerObserver: Bytes! # address
+  # controllerObserver: Bytes! # address
 
   acceptedToken: Bytes! # address
+  beneficiary: Bytes! # address
+  minimumBidFactorWad: BigInt!
+  reserveRate: BigInt!
 
   ## non constants
-  topBid: BigInt
-  currentRenter: Bytes
+  topBid: BigInt!
+  currentRenter: Bytes!
+
+  controllerObserver: GenericControllerObserver!
 
   ## controller related stuff
-  underlyingTokenContract: Bytes
-  underlyingTokenID: BigInt
+  # underlyingTokenContract: Bytes
+  # underlyingTokenID: BigInt
 
-  underlyingTokenName: String
-  underlyingTokenURI: String
+  # underlyingTokenName: String
+  # underlyingTokenURI: String
 }
 
 # type IRentalAuctionControllerObserver @entity {id: Bytes!}
