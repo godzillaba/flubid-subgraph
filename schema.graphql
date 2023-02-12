@@ -66,6 +66,7 @@ type ContinuousRentalAuction @entity(immutable: false) {
 }
 
 type EnglishRentalAuction @entity(immutable: false) {
+  # todo: paused?
   id: Bytes!
 
   address: Bytes!
@@ -102,7 +103,17 @@ type RentalAuction @entity(immutable: false) {
   ## non constants
   topBid: BigInt
   currentRenter: Bytes
+
+  ## controller related stuff
+  underlyingTokenContract: Bytes
+  underlyingTokenID: BigInt
+
+  underlyingTokenName: String
+  underlyingTokenURI: String
 }
+
+# type IRentalAuctionControllerObserver @entity {id: Bytes!}
+# type ERC4907Metadata @entity {id: Bytes!}
 
 # type RentalAuctionControllerObserver @entity(immutable: true) {
 #   id: Bytes! # address

@@ -1,0 +1,649 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IRentalAuction",
+          "name": "rentalAuction",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "auxData",
+          "type": "bytes"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newRenter",
+          "type": "address"
+        }
+      ],
+      "name": "onRenterChanged",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "startAuction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "stopAuction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "underlyingTokenContract",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "underlyingTokenID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "initialize(address,address,bytes)": "cf7a1d77",
+    "onRenterChanged(address)": "1ff0045b",
+    "startAuction()": "6b64c769",
+    "stopAuction()": "269b9a08",
+    "underlyingTokenContract()": "55f84309",
+    "underlyingTokenID()": "082f2cb1"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IRentalAuction\",\"name\":\"rentalAuction\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"auxData\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newRenter\",\"type\":\"address\"}],\"name\":\"onRenterChanged\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"startAuction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stopAuction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingTokenContract\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingTokenID\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/interfaces/IRentalAuctionControllerObserver.sol\":\"IRentalAuctionControllerObserver\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":ens-contracts/=lib/ens-contracts/contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":ethereum-contracts/=lib/ethereum-contracts/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/\",\":superfluid-finance/=lib/ethereum-contracts/packages/ethereum-contracts/\"]},\"sources\":{\"src/interfaces/IRentalAuction.sol\":{\"keccak256\":\"0xaca9a752b2c4c66e49d2ff5fcbbcfd26c62ffdff0c21720b5dc68bae34c53f03\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://3c65f7783479ec82d4ace9200589c69d532dafaf153dff24b6f4151b269cd867\",\"dweb:/ipfs/QmeqGUM4MXpkrCRFdjfcyLyChL63CUMTJRmA7C1ggaJ2WY\"]},\"src/interfaces/IRentalAuctionControllerObserver.sol\":{\"keccak256\":\"0xd326f4bb148b99701fa246b061648d677ce64a0bf3ed74fe0ad81f5e594c7ee7\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://470188ad428c3fcccb443d98e318cb4db8814bd1b6ab59efa44506170bb9a865\",\"dweb:/ipfs/QmWP9a8zd8ujFA6UNbvP1VKCWevVbBBZ6oDqgsRKYBpaAJ\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.16+commit.07a7930e"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "contract IRentalAuction",
+              "name": "rentalAuction",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "auxData",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "initialize"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newRenter",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "onRenterChanged"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "startAuction"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "stopAuction"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "underlyingTokenContract",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "underlyingTokenID",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin/=lib/openzeppelin-contracts/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":ens-contracts/=lib/ens-contracts/contracts/",
+        ":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        ":ethereum-contracts/=lib/ethereum-contracts/",
+        ":forge-std/=lib/forge-std/src/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/",
+        ":superfluid-finance/=lib/ethereum-contracts/packages/ethereum-contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/interfaces/IRentalAuctionControllerObserver.sol": "IRentalAuctionControllerObserver"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "src/interfaces/IRentalAuction.sol": {
+        "keccak256": "0xaca9a752b2c4c66e49d2ff5fcbbcfd26c62ffdff0c21720b5dc68bae34c53f03",
+        "urls": [
+          "bzz-raw://3c65f7783479ec82d4ace9200589c69d532dafaf153dff24b6f4151b269cd867",
+          "dweb:/ipfs/QmeqGUM4MXpkrCRFdjfcyLyChL63CUMTJRmA7C1ggaJ2WY"
+        ],
+        "license": "UNLICENSED"
+      },
+      "src/interfaces/IRentalAuctionControllerObserver.sol": {
+        "keccak256": "0xd326f4bb148b99701fa246b061648d677ce64a0bf3ed74fe0ad81f5e594c7ee7",
+        "urls": [
+          "bzz-raw://470188ad428c3fcccb443d98e318cb4db8814bd1b6ab59efa44506170bb9a865",
+          "dweb:/ipfs/QmWP9a8zd8ujFA6UNbvP1VKCWevVbBBZ6oDqgsRKYBpaAJ"
+        ],
+        "license": "UNLICENSED"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/interfaces/IRentalAuctionControllerObserver.sol",
+    "id": 64439,
+    "exportedSymbols": {
+      "IRentalAuction": [
+        64402
+      ],
+      "IRentalAuctionControllerObserver": [
+        64438
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "39:638:117",
+    "nodes": [
+      {
+        "id": 64404,
+        "nodeType": "PragmaDirective",
+        "src": "39:24:117",
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 64406,
+        "nodeType": "ImportDirective",
+        "src": "65:54:117",
+        "absolutePath": "src/interfaces/IRentalAuction.sol",
+        "file": "./IRentalAuction.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 64439,
+        "sourceUnit": 64403,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 64405,
+              "name": "IRentalAuction",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 64402,
+              "src": "74:14:117",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 64438,
+        "nodeType": "ContractDefinition",
+        "src": "121:556:117",
+        "nodes": [
+          {
+            "id": 64416,
+            "nodeType": "FunctionDefinition",
+            "src": "170:98:117",
+            "functionSelector": "cf7a1d77",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nameLocation": "179:10:117",
+            "parameters": {
+              "id": 64414,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 64409,
+                  "mutability": "mutable",
+                  "name": "rentalAuction",
+                  "nameLocation": "205:13:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64416,
+                  "src": "190:28:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IRentalAuction_$64402",
+                    "typeString": "contract IRentalAuction"
+                  },
+                  "typeName": {
+                    "id": 64408,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 64407,
+                      "name": "IRentalAuction",
+                      "nameLocations": [
+                        "190:14:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 64402,
+                      "src": "190:14:117"
+                    },
+                    "referencedDeclaration": 64402,
+                    "src": "190:14:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IRentalAuction_$64402",
+                      "typeString": "contract IRentalAuction"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 64411,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "nameLocation": "228:5:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64416,
+                  "src": "220:13:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 64410,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "220:7:117",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 64413,
+                  "mutability": "mutable",
+                  "name": "auxData",
+                  "nameLocation": "250:7:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64416,
+                  "src": "235:22:117",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 64412,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "235:5:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "189:69:117"
+            },
+            "returnParameters": {
+              "id": 64415,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "267:0:117"
+            },
+            "scope": 64438,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 64421,
+            "nodeType": "FunctionDefinition",
+            "src": "273:53:117",
+            "functionSelector": "1ff0045b",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onRenterChanged",
+            "nameLocation": "282:15:117",
+            "parameters": {
+              "id": 64419,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 64418,
+                  "mutability": "mutable",
+                  "name": "newRenter",
+                  "nameLocation": "306:9:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64421,
+                  "src": "298:17:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 64417,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "298:7:117",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "297:19:117"
+            },
+            "returnParameters": {
+              "id": 64420,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "325:0:117"
+            },
+            "scope": 64438,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 64424,
+            "nodeType": "FunctionDefinition",
+            "src": "466:33:117",
+            "functionSelector": "6b64c769",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "startAuction",
+            "nameLocation": "475:12:117",
+            "parameters": {
+              "id": 64422,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "487:2:117"
+            },
+            "returnParameters": {
+              "id": 64423,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "498:0:117"
+            },
+            "scope": 64438,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 64427,
+            "nodeType": "FunctionDefinition",
+            "src": "504:32:117",
+            "functionSelector": "269b9a08",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "stopAuction",
+            "nameLocation": "513:11:117",
+            "parameters": {
+              "id": 64425,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "524:2:117"
+            },
+            "returnParameters": {
+              "id": 64426,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "535:0:117"
+            },
+            "scope": 64438,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 64432,
+            "nodeType": "FunctionDefinition",
+            "src": "542:67:117",
+            "functionSelector": "55f84309",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingTokenContract",
+            "nameLocation": "551:23:117",
+            "parameters": {
+              "id": 64428,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "574:2:117"
+            },
+            "returnParameters": {
+              "id": 64431,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 64430,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64432,
+                  "src": "600:7:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 64429,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "600:7:117",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "599:9:117"
+            },
+            "scope": 64438,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 64437,
+            "nodeType": "FunctionDefinition",
+            "src": "614:61:117",
+            "functionSelector": "082f2cb1",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlyingTokenID",
+            "nameLocation": "623:17:117",
+            "parameters": {
+              "id": 64433,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "640:2:117"
+            },
+            "returnParameters": {
+              "id": 64436,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 64435,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64437,
+                  "src": "666:7:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 64434,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "666:7:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "665:9:117"
+            },
+            "scope": 64438,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IRentalAuctionControllerObserver",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          64438
+        ],
+        "name": "IRentalAuctionControllerObserver",
+        "nameLocation": "131:32:117",
+        "scope": 64439,
+        "usedErrors": []
+      }
+    ],
+    "license": "UNLICENSED"
+  },
+  "id": 117
+}

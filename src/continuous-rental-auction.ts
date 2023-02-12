@@ -1,7 +1,9 @@
-import { BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
+import { Address, BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {
   ContinuousRentalAuction as ContinuousRentalAuctionContract
 } from "../generated/templates/ContinuousRentalAuction/ContinuousRentalAuction"
+import { IRentalAuctionControllerObserver as IRentalAuctionControllerObserverContract } from "../generated/templates/IRentalAuctionControllerObserver/IRentalAuctionControllerObserver";
+import { ERC4907Metadata as ERC4907MetadataContract } from "../generated/templates/ERC4907Metadata/ERC4907Metadata";
 import { ContinuousRentalAuction, RentalAuction, Stream, StreamHistory } from "../generated/schema";
 import { log } from '@graphprotocol/graph-ts'
 
@@ -23,11 +25,18 @@ export function handleInitialized(event: InitializedEvent): void {
   entity.reserveRate = event.params.reserveRate;
   
   const genericEntity = new RentalAuction(createIdFromAddress("RentalAuction", event.address));
+
+  const controllerContract = IRentalAuctionControllerObserverContract.bind(Address.fromBytes(entity.controllerObserver));
+  const erc721MetadataContract = ERC4907MetadataContract.bind(controllerContract.underlyingTokenContract());
   genericEntity.type = "continuous";
   genericEntity.address = event.address;
   genericEntity.controllerObserver = entity.controllerObserver;
   genericEntity.controllerObserverImplementation = entity.controllerObserverImplementation;
   genericEntity.acceptedToken = event.params.acceptedToken;
+  genericEntity.underlyingTokenContract = controllerContract.underlyingTokenContract();
+  genericEntity.underlyingTokenID = controllerContract.underlyingTokenID();
+  genericEntity.underlyingTokenName = erc721MetadataContract.name();
+  genericEntity.underlyingTokenURI = erc721MetadataContract.tokenURI(controllerContract.underlyingTokenID());
   
   entity.save();
   genericEntity.save();

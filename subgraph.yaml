@@ -18,6 +18,10 @@ dataSources:
       abis:
         - name: ContinuousRentalAuctionFactory
           file: ./abis/ContinuousRentalAuctionFactory.json
+        - name: IRentalAuctionControllerObserver
+          file: ./abis/IRentalAuctionControllerObserver.json
+        - name: ERC4907Metadata
+          file: ./abis/ERC4907Metadata.json
       eventHandlers:
         - event: ContinuousRentalAuctionDeployed(indexed address,indexed address,indexed address)
           handler: handleContinuousRentalAuctionDeployed
@@ -61,6 +65,10 @@ templates:
       abis:
         - name: ContinuousRentalAuction
           file: ./abis/ContinuousRentalAuction.json
+        - name: IRentalAuctionControllerObserver
+          file: ./abis/IRentalAuctionControllerObserver.json
+        - name: ERC4907Metadata
+          file: ./abis/ERC4907Metadata.json
       eventHandlers:
         - event: Initialized(indexed address,indexed address,indexed address,uint96,int96)
           handler: handleInitialized
@@ -88,6 +96,10 @@ templates:
       abis:
         - name: EnglishRentalAuction
           file: ./abis/EnglishRentalAuction.json
+        - name: IRentalAuctionControllerObserver
+          file: ./abis/IRentalAuctionControllerObserver.json
+        - name: ERC4907Metadata
+          file: ./abis/ERC4907Metadata.json
       eventHandlers:
         - event: Initialized(address,address,address,uint96,int96,uint64,uint64,uint64,uint64)
           handler: handleInitialized
@@ -100,23 +112,33 @@ templates:
         # - event: StreamTerminated(indexed address)
         #   handler: handleStreamTerminated
 
-  - name: LensProfileControllerObserver
+  - name: ERC4907Metadata
     kind: ethereum/contract
     network: mumbai
     source:
-      abi: LensProfileControllerObserver
+      abi: ERC4907Metadata
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/continuous-rental-auction.ts
+      file: ./src/noop.ts
       entities:
-        - LensProfileControllerObserver
+        - ERC4907Metadata
       abis:
-        - name: LensProfileControllerObserver
-          file: ./abis/LensProfileControllerObserver.json
-      eventHandlers:
-        - event: AuctionStopped()
-          handler: handleAuctionStopped
-        - event: AuctionStarted()
-          handler: handleAuctionStarted
+        - name: ERC4907Metadata
+          file: ./abis/ERC4907Metadata.json
+  - name: IRentalAuctionControllerObserver
+    kind: ethereum/contract
+    network: mumbai
+    source:
+      abi: IRentalAuctionControllerObserver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/noop.ts
+      entities:
+        - IRentalAuctionControllerObserver
+      abis:
+        - name: IRentalAuctionControllerObserver
+          file: ./abis/IRentalAuctionControllerObserver.json

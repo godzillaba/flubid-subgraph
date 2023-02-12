@@ -1,0 +1,55 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "lib/openzeppelin-contracts/contracts/interfaces/IERC721Metadata.sol",
+    "id": 32595,
+    "exportedSymbols": {
+      "IERC165": [
+        34558
+      ],
+      "IERC721": [
+        33733
+      ],
+      "IERC721Metadata": [
+        33778
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "99:82:33",
+    "nodes": [
+      {
+        "id": 32593,
+        "nodeType": "PragmaDirective",
+        "src": "99:23:33",
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 32594,
+        "nodeType": "ImportDirective",
+        "src": "124:56:33",
+        "absolutePath": "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "file": "../token/ERC721/extensions/IERC721Metadata.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 32595,
+        "sourceUnit": 33779,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 33
+}
