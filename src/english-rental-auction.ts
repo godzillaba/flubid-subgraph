@@ -14,7 +14,8 @@ import {
 import { createIdFromAddress } from "./helpers";
 
 export function handleInitialized(event: InitializedEvent): void {
-  const entity = new EnglishRentalAuction(createIdFromAddress("EnglishRentalAuction", event.address));
+  const entity = EnglishRentalAuction.load(createIdFromAddress("EnglishRentalAuction", event.address));
+  if (entity === null) return;
   entity.acceptedToken = event.params.acceptedToken;
   entity.beneficiary = event.params.beneficiary;
   entity.minimumBidFactorWad = event.params.minimumBidFactorWad;
@@ -28,7 +29,11 @@ export function handleInitialized(event: InitializedEvent): void {
   entity.save();
 
 
-  // const genericEntity = new RentalAuction(createIdFromAddress("RentalAuction", event.address));
-  // genericEntity.type = "english";
-  // genericEntity.save();
+  const genericEntity = new RentalAuction(createIdFromAddress("RentalAuction", event.address));
+  genericEntity.type = "english";
+  genericEntity.address = event.address;
+  genericEntity.controllerObserver = entity.controllerObserver;
+  genericEntity.controllerObserverImplementation = entity.controllerObserverImplementation;
+  genericEntity.acceptedToken = event.params.acceptedToken;
+  genericEntity.save();
 }

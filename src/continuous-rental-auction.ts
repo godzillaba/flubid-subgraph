@@ -1,8 +1,9 @@
 import { BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {
-  ContinuousRentalAuctionDeployed as ContinuousRentalAuctionDeployedEvent
-} from "../generated/ContinuousRentalAuctionFactory/ContinuousRentalAuctionFactory"
-import { ContinuousRentalAuction, Stream, StreamHistory } from "../generated/schema";
+  ContinuousRentalAuction as ContinuousRentalAuctionContract
+} from "../generated/templates/ContinuousRentalAuction/ContinuousRentalAuction"
+import { ContinuousRentalAuction, RentalAuction, Stream, StreamHistory } from "../generated/schema";
+import { log } from '@graphprotocol/graph-ts'
 
 import {
   Initialized as InitializedEvent,
@@ -14,20 +15,37 @@ import {
 import { createIdFromAddress, createRandomId } from "./helpers";
 
 export function handleInitialized(event: InitializedEvent): void {
-  const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
+  const entity = ContinuousRentalAuction.load(createIdFromAddress("ContinuousRentalAuction", event.address));
+  if (entity === null) return;
   entity.acceptedToken = event.params.acceptedToken;
   entity.beneficiary = event.params.beneficiary;
   entity.minimumBidFactorWad = event.params.minimumBidFactorWad;
   entity.reserveRate = event.params.reserveRate;
+  
+  const genericEntity = new RentalAuction(createIdFromAddress("RentalAuction", event.address));
+  genericEntity.type = "continuous";
+  genericEntity.address = event.address;
+  genericEntity.controllerObserver = entity.controllerObserver;
+  genericEntity.controllerObserverImplementation = entity.controllerObserverImplementation;
+  genericEntity.acceptedToken = event.params.acceptedToken;
+  
   entity.save();
+  genericEntity.save();
 }
 
 export function handleRenterChanged(event: RenterChangedEvent): void {
   const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
+  const contract = ContinuousRentalAuctionContract.bind(event.address);
 
   entity.currentRenter = event.params.newRenter;
 
   entity.save();
+
+  const genericEntity = RentalAuction.load(createIdFromAddress("RentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.currentRenter = event.params.newRenter;
+  genericEntity.topBid = contract.senderInfo(event.params.newRenter).getFlowRate();
+  genericEntity.save();
 }
 export function handleNewInboundStream(event: NewInboundStreamEvent): void {
   const entity = new ContinuousRentalAuction(createIdFromAddress("ContinuousRentalAuction", event.address));
@@ -114,37 +132,3 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
 }
-
-// export function handleContinuousRentalAuctionDeployed(
-//   event: ContinuousRentalAuctionDeployedEvent
-// ): void {
-//   let entity = new ContinuousRentalAuctionDeployed(
-//     event.transaction.hash.concatI32(event.logIndex.toI32())
-//   )
-//   entity.auctionAddress = event.params.auctionAddress
-//   entity.controllerObserverAddress = event.params.controllerObserverAddress
-
-//   entity.blockNumber = event.block.number
-//   entity.blockTimestamp = event.block.timestamp
-//   entity.transactionHash = event.transaction.hash
-
-//   entity.save()
-// }
-
-// export function handleRentalAuctionControllerObserverDeployed(
-//   event: RentalAuctionControllerObserverDeployedEvent
-// ): void {
-//   let entity = new RentalAuctionControllerObserverDeployed(
-//     event.transaction.hash.concatI32(event.logIndex.toI32())
-//   )
-//   entity.controllerObserverImplementation =
-//     event.params.controllerObserverImplementation
-//   entity.controllerObserverAddress = event.params.controllerObserverAddress
-//   entity.auctionAddress = event.params.auctionAddress
-
-//   entity.blockNumber = event.block.number
-//   entity.blockTimestamp = event.block.timestamp
-//   entity.transactionHash = event.transaction.hash
-
-//   entity.save()
-// }

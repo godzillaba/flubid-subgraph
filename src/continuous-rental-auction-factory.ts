@@ -18,5 +18,6 @@ export function handleContinuousRentalAuctionDeployed(
   entity.controllerObserverImplementation = event.params.controllerObserverImplementation;
   entity.controllerObserver = event.params.controllerObserverAddress;
   entity.inboundStreams = [];
+  // todo: we can set the other constants here by reading the contract. we can get rid of Initialized event too.
   entity.save(); 
 }

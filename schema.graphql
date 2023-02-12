@@ -89,8 +89,19 @@ type EnglishRentalAuction @entity(immutable: false) {
 }
 
 type RentalAuction @entity(immutable: false) {
-  id: Bytes! # address
-  type: String
+  id: Bytes! 
+  type: String!
+  address: Bytes! # address
+
+  ## Constants
+  controllerObserverImplementation: Bytes! # address
+  controllerObserver: Bytes! # address
+
+  acceptedToken: Bytes! # address
+
+  ## non constants
+  topBid: BigInt
+  currentRenter: Bytes
 }
 
 # type RentalAuctionControllerObserver @entity(immutable: true) {
