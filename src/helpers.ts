@@ -3,7 +3,12 @@ import { crypto } from "@graphprotocol/graph-ts";
 
 export function createRandomId(prefix: string, txHash: Bytes, logIndex: BigInt): Bytes {
     return Bytes.fromByteArray(
-        crypto.keccak256(Bytes.fromUTF8(prefix).concat(txHash.concat(Bytes.fromHexString(logIndex.toHex()))))
+        crypto.keccak256(
+            crypto.keccak256(Bytes.fromUTF8(prefix))
+            .concat(crypto.keccak256(txHash))
+            .concat(crypto.keccak256(Bytes.fromBigInt(logIndex)))
+        )
+        // crypto.keccak256(Bytes.fromUTF8(prefix).concat(txHash.concat(Bytes.fromHexString(logIndex.toHex()))))
     );
 }
 

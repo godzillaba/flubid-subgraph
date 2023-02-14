@@ -52,6 +52,7 @@ export function handleContinuousRentalAuctionDeployed(
   genericRentalAuctionEntity.reserveRate = auctionContract.reserveRate();
   genericRentalAuctionEntity.topBid = BigInt.fromI32(0);
   genericRentalAuctionEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
+  genericRentalAuctionEntity.paused = auctionContract.paused();
   
   // GenericControllerObserver
   const genericControllerObserverEntity = new GenericControllerObserver(

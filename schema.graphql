@@ -120,6 +120,8 @@ type GenericRentalAuction @entity(immutable: false) {
 
   controllerObserver: GenericControllerObserver!
 
+  paused: Boolean!
+
   ## controller related stuff
   # underlyingTokenContract: Bytes
   # underlyingTokenID: BigInt
