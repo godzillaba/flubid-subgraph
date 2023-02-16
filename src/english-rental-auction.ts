@@ -11,8 +11,8 @@ import { EnglishRentalAuction } from "../generated/schema";
 import {
   Initialized as InitializedEvent,
 } from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction";
-import { IRentalAuctionControllerObserver as IRentalAuctionControllerObserverContract } from "../generated/templates/IRentalAuctionControllerObserver/IRentalAuctionControllerObserver";
-import { ERC4907Metadata as ERC4907MetadataContract } from "../generated/templates/ERC4907Metadata/ERC4907Metadata";
+// import { IRentalAuctionControllerObserver as IRentalAuctionControllerObserverContract } from "../generated/templates/IRentalAuctionControllerObserver/IRentalAuctionControllerObserver";
+// import { ERC4907Metadata as ERC4907MetadataContract } from "../generated/templates/ERC4907Metadata/ERC4907Metadata";
 import { createIdFromAddress } from "./helpers";
 
 export function handleInitialized(event: InitializedEvent): void {

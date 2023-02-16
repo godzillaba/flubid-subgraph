@@ -10,11 +10,11 @@ import {
   EnglishRentalAuction as EnglishRentalAuctionContract
 } from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction"
 import {
-  IRentalAuctionControllerObserver as ControllerObserverContract
-} from "../generated/templates/IRentalAuctionControllerObserver/IRentalAuctionControllerObserver"
+  ERC721ControllerObserver as ERC721ControllerObserverContract
+} from "../generated/templates/ERC721ControllerObserver/ERC721ControllerObserver"
 import {
-  ERC4907Metadata as TokenContract
-} from "../generated/templates/ERC4907Metadata/ERC4907Metadata"
+  IERC721Metadata as TokenContract
+} from "../generated/templates/IERC721Metadata/IERC721Metadata"
 
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 
@@ -27,7 +27,7 @@ export function handleEnglishRentalAuctionDeployed(
 
   // create contract objects
   const auctionContract = EnglishRentalAuctionContract.bind(event.params.auctionAddress);
-  const controllerContract = ControllerObserverContract.bind(event.params.controllerObserverAddress);
+  const controllerContract = ERC721ControllerObserverContract.bind(event.params.controllerObserverAddress);
   const tokenContract = TokenContract.bind(controllerContract.underlyingTokenContract());
 
   // ContinuousRentalAuction

@@ -2,8 +2,6 @@ import { Address, BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {
   ContinuousRentalAuction as ContinuousRentalAuctionContract
 } from "../generated/templates/ContinuousRentalAuction/ContinuousRentalAuction"
-import { IRentalAuctionControllerObserver as IRentalAuctionControllerObserverContract } from "../generated/templates/IRentalAuctionControllerObserver/IRentalAuctionControllerObserver";
-import { ERC4907Metadata as ERC4907MetadataContract } from "../generated/templates/ERC4907Metadata/ERC4907Metadata";
 import { ContinuousRentalAuction, GenericRentalAuction, Stream, StreamHistory } from "../generated/schema";
 import { log } from '@graphprotocol/graph-ts'
 
@@ -12,7 +10,9 @@ import {
   RenterChanged as RenterChangedEvent,
   NewInboundStream as NewInboundStreamEvent,
   StreamUpdated as StreamUpdatedEvent,
-  StreamTerminated as StreamTerminatedEvent
+  StreamTerminated as StreamTerminatedEvent,
+  Paused as PausedEvent,
+  Unpaused as UnpausedEvent
 } from "../generated/templates/ContinuousRentalAuction/ContinuousRentalAuction";
 import { createIdFromAddress, createRandomId } from "./helpers";
 
@@ -142,4 +142,19 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
   streamHistoryEntity.sender = event.params.streamer;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
+}
+
+
+export function handlePaused(event: PausedEvent): void {
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.paused = true;
+  genericEntity.save();
+}
+
+export function handleUnpaused(event: UnpausedEvent): void {
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.paused = false;
+  genericEntity.save();
 }
