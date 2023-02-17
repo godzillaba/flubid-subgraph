@@ -143,6 +143,7 @@ templates:
       abis:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
+  
   - name: ERC721ControllerObserver
     kind: ethereum/contract
     network: mumbai
@@ -152,9 +153,12 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/noop.ts
+      file: ./src/generic-controller-observer.ts
       entities:
         - ERC721ControllerObserver
       abis:
         - name: ERC721ControllerObserver
           file: ./abis/ERC721ControllerObserver.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred

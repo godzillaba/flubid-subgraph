@@ -98,6 +98,8 @@ type GenericControllerObserver @entity(immutable: false) {
 
   underlyingTokenName: String!
   underlyingTokenURI: String!
+
+  owner: Bytes! # address
 }
 
 type GenericRentalAuction @entity(immutable: false) {

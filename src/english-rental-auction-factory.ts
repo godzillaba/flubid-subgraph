@@ -68,6 +68,7 @@ export function handleEnglishRentalAuctionDeployed(
   genericControllerObserverEntity.underlyingTokenID = controllerContract.underlyingTokenID();
   genericControllerObserverEntity.underlyingTokenName = tokenContract.name();
   genericControllerObserverEntity.underlyingTokenURI = tokenContract.tokenURI(controllerContract.underlyingTokenID());
+  genericControllerObserverEntity.owner = controllerContract.owner();
 
 
 
