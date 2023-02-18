@@ -3,8 +3,9 @@ import {
 } from "../generated/EnglishRentalAuctionFactory/EnglishRentalAuctionFactory"
 
 import { EnglishRentalAuction as EnglishRentalAuctionTemplate } from "../generated/templates";
+import { ERC721ControllerObserver as ERC721ControllerObserverTemplate } from "../generated/templates";
 
-import { EnglishRentalAuction, GenericControllerObserver, GenericRentalAuction } from "../generated/schema";
+import { EnglishRentalAuction, ERC721ControllerObserver, GenericRentalAuction } from "../generated/schema";
 import { createIdFromAddress } from "./helpers";
 import {
   EnglishRentalAuction as EnglishRentalAuctionContract
@@ -18,12 +19,14 @@ import {
 
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 
+// todo: creation timestamp so the explorer can sort by creation date
+
 export function handleEnglishRentalAuctionDeployed(
   event: EnglishRentalAuctionDeployedEvent
 ): void {
   // make EnglishRentalAuction
   // make GenericRentalAuction
-  // make GenericControllerObserver
+  // make ERC721ControllerObserver
 
   // create contract objects
   const auctionContract = EnglishRentalAuctionContract.bind(event.params.auctionAddress);
@@ -48,7 +51,7 @@ export function handleEnglishRentalAuctionDeployed(
   genericRentalAuctionEntity.type = "english";
   genericRentalAuctionEntity.address = event.params.auctionAddress;
   genericRentalAuctionEntity.controllerObserverImplementation = event.params.controllerObserverImplementation;
-  genericRentalAuctionEntity.controllerObserver = createIdFromAddress("GenericControllerObserver", event.params.controllerObserverAddress);
+  genericRentalAuctionEntity.controllerObserver = createIdFromAddress("ERC721ControllerObserver", event.params.controllerObserverAddress);
   genericRentalAuctionEntity.acceptedToken = auctionContract.acceptedToken();
   genericRentalAuctionEntity.beneficiary = auctionContract.beneficiary();
   genericRentalAuctionEntity.minimumBidFactorWad = auctionContract.minimumBidFactorWad();
@@ -57,22 +60,23 @@ export function handleEnglishRentalAuctionDeployed(
   genericRentalAuctionEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
   genericRentalAuctionEntity.paused = auctionContract.paused();
   
-  // GenericControllerObserver
-  const genericControllerObserverEntity = new GenericControllerObserver(
-    createIdFromAddress("GenericControllerObserver", event.params.controllerObserverAddress)
+  // ERC721ControllerObserver
+  ERC721ControllerObserverTemplate.create(event.params.controllerObserverAddress);
+  const erc721ControllerObserverEntity = new ERC721ControllerObserver(
+    createIdFromAddress("ERC721ControllerObserver", event.params.controllerObserverAddress)
   );
-  genericControllerObserverEntity.address = event.params.controllerObserverAddress;
-  genericControllerObserverEntity.implementation = event.params.controllerObserverImplementation;
-  genericControllerObserverEntity.auctionAddress = event.params.auctionAddress;
-  genericControllerObserverEntity.underlyingTokenContract = controllerContract.underlyingTokenContract();
-  genericControllerObserverEntity.underlyingTokenID = controllerContract.underlyingTokenID();
-  genericControllerObserverEntity.underlyingTokenName = tokenContract.name();
-  genericControllerObserverEntity.underlyingTokenURI = tokenContract.tokenURI(controllerContract.underlyingTokenID());
-  genericControllerObserverEntity.owner = controllerContract.owner();
+  erc721ControllerObserverEntity.address = event.params.controllerObserverAddress;
+  erc721ControllerObserverEntity.implementation = event.params.controllerObserverImplementation;
+  erc721ControllerObserverEntity.auctionAddress = event.params.auctionAddress;
+  erc721ControllerObserverEntity.underlyingTokenContract = controllerContract.underlyingTokenContract();
+  erc721ControllerObserverEntity.underlyingTokenID = controllerContract.underlyingTokenID();
+  erc721ControllerObserverEntity.underlyingTokenName = tokenContract.name();
+  erc721ControllerObserverEntity.underlyingTokenURI = tokenContract.tokenURI(controllerContract.underlyingTokenID());
+  erc721ControllerObserverEntity.owner = controllerContract.owner();
 
 
 
-  genericControllerObserverEntity.save();
+  erc721ControllerObserverEntity.save();
   genericRentalAuctionEntity.save();
   continuousRentalAuctionEntity.save();
   // EnglishRentalAuctionTemplate.create(event.params.auctionAddress);

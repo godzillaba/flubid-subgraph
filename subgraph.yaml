@@ -153,7 +153,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/generic-controller-observer.ts
+      file: ./src/erc721-controller-observer.ts
       entities:
         - ERC721ControllerObserver
       abis:

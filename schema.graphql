@@ -87,7 +87,7 @@ type EnglishRentalAuction @entity(immutable: false) {
   # todo phase info
 }
 
-type GenericControllerObserver @entity(immutable: false) {
+type ERC721ControllerObserver @entity(immutable: false) {
   id: Bytes! # address based
   address: Bytes!
   implementation: Bytes! # address
@@ -120,7 +120,7 @@ type GenericRentalAuction @entity(immutable: false) {
   topBid: BigInt!
   currentRenter: Bytes!
 
-  controllerObserver: GenericControllerObserver!
+  controllerObserver: ERC721ControllerObserver!
 
   paused: Boolean!
 
