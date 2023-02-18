@@ -68,6 +68,7 @@ export function handleContinuousRentalAuctionDeployed(
   erc721ControllerObserverEntity.underlyingTokenName = tokenContract.name();
   erc721ControllerObserverEntity.underlyingTokenURI = tokenContract.tokenURI(controllerContract.underlyingTokenID());
   erc721ControllerObserverEntity.owner = controllerContract.owner();
+  erc721ControllerObserverEntity.genericRentalAuction = createIdFromAddress("GenericRentalAuction", event.params.auctionAddress);
 
 
 

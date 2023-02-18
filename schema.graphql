@@ -93,6 +93,8 @@ type ERC721ControllerObserver @entity(immutable: false) {
   implementation: Bytes! # address
   auctionAddress: Bytes! # address
 
+  genericRentalAuction: GenericRentalAuction!
+
   underlyingTokenContract: Bytes!
   underlyingTokenID: BigInt!
 
