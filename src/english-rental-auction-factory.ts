@@ -70,8 +70,10 @@ export function handleEnglishRentalAuctionDeployed(
   erc721ControllerObserverEntity.auctionAddress = event.params.auctionAddress;
   erc721ControllerObserverEntity.underlyingTokenContract = controllerContract.underlyingTokenContract();
   erc721ControllerObserverEntity.underlyingTokenID = controllerContract.underlyingTokenID();
-  erc721ControllerObserverEntity.underlyingTokenName = tokenContract.name();
-  erc721ControllerObserverEntity.underlyingTokenURI = tokenContract.tokenURI(controllerContract.underlyingTokenID());
+  const nameCall = tokenContract.try_name();
+  erc721ControllerObserverEntity.underlyingTokenName = nameCall.reverted ? "unknown" : nameCall.value;
+  const tokenURICall = tokenContract.try_tokenURI(controllerContract.underlyingTokenID());
+  erc721ControllerObserverEntity.underlyingTokenURI = tokenURICall.reverted ? "unknown" : tokenURICall.value;
   erc721ControllerObserverEntity.owner = controllerContract.owner();
   erc721ControllerObserverEntity.genericRentalAuction = createIdFromAddress("GenericRentalAuction", event.params.auctionAddress);
 
