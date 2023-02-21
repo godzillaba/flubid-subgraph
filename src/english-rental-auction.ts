@@ -5,7 +5,21 @@
 // import { ContinuousRentalAuction, Stream, StreamHistory } from "../generated/schema";
 
 import { Address, BigDecimal, BigInt, Bytes } from "@graphprotocol/graph-ts";
-import { EnglishRentalAuction } from "../generated/schema";
+import { EnglishRentalAuction, GenericRentalAuction } from "../generated/schema";
+import {
+  Paused as PausedEvent,
+  Unpaused as UnpausedEvent,
+  NewTopBid as NewTopBidEvent,
+  DepositClaimed as DepositClaimedEvent,
+  TransitionedToRentalPhase as TransitionedToRentalPhaseEvent,
+  TransitionedToBiddingPhase as TransitionedToBiddingPhaseEvent,
+  TransitionToRentalPhaseFailed as TransitionToRentalPhaseFailedEvent,
+  TransitionedToBiddingPhaseEarly as TransitionedToBiddingPhaseEarlyEvent,
+} from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction";
+
+import {
+  EnglishRentalAuction as EnglishRentalAuctionContract
+} from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction";
 
 
 import {
@@ -46,4 +60,90 @@ export function handleInitialized(event: InitializedEvent): void {
   // genericEntity.underlyingTokenURI = erc721MetadataContract.tokenURI(controllerContract.underlyingTokenID());
 
   // genericEntity.save();
+}
+
+export function handlePaused(event: PausedEvent): void {
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.paused = true;
+  genericEntity.save();
+}
+
+export function handleUnpaused(event: UnpausedEvent): void {
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.paused = false;
+  genericEntity.save();
+}
+
+// export function handle(event: RenterChangedEvent): void {
+//   const contract = EnglishRentalAuctionContract.bind(event.address);
+
+//   const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+//   if (genericEntity === null) return;
+//   genericEntity.currentRenter = event.params.newRenter;
+//   genericEntity.topBid = contract.senderInfo(event.params.newRenter).getFlowRate();
+//   genericEntity.save();
+// }
+
+export function handleNewTopBid(event: NewTopBidEvent): void {
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.topBid = event.params.flowRate;
+  genericEntity.save();
+
+  const englishEntity = EnglishRentalAuction.load(createIdFromAddress("EnglishRentalAuction", event.address));
+  const englishContract = EnglishRentalAuctionContract.bind(event.address);
+  if (englishEntity === null) return;
+  englishEntity.topBidder = event.params.bidder;
+  englishEntity.currentPhaseEndTime = englishContract.currentPhaseEndTime();
+  englishEntity.save();
+}
+
+export function handleDepositClaimed(event: DepositClaimedEvent): void {
+  const englishEntity = EnglishRentalAuction.load(createIdFromAddress("EnglishRentalAuction", event.address));
+  if (englishEntity === null) return;
+  englishEntity.depositClaimed = true;
+  englishEntity.save();
+}
+
+export function handleTransitionedToRentalPhase(event: TransitionedToRentalPhaseEvent): void {
+  const englishEntity = EnglishRentalAuction.load(createIdFromAddress("EnglishRentalAuction", event.address));
+  if (englishEntity === null) return;
+  englishEntity.isBiddingPhase = false;
+  englishEntity.currentPhaseEndTime = event.block.timestamp.plus(englishEntity.maxRentalDuration);
+  englishEntity.save();
+
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  if (genericEntity === null) return;
+  genericEntity.currentRenter = event.params.renter;
+  genericEntity.save();
+}
+
+function transitionedToBiddingPhase(address: Address): void {
+  const englishEntity = EnglishRentalAuction.load(createIdFromAddress("EnglishRentalAuction", address));
+  if (englishEntity === null) return;
+  englishEntity.topBidder = Address.fromHexString("0x0000000000000000000000000000000000000000");
+  englishEntity.depositClaimed = false;
+  englishEntity.isBiddingPhase = true;
+  englishEntity.currentPhaseEndTime = BigInt.fromI32(0);
+  englishEntity.save();
+
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", address));
+  if (genericEntity === null) return;
+  genericEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
+  genericEntity.topBid = BigInt.fromI32(0);
+  genericEntity.save();
+}
+
+export function handleTransitionedToBiddingPhase(event: TransitionedToBiddingPhaseEvent): void {
+  transitionedToBiddingPhase(event.address);
+}
+
+export function handleTransitionToRentalPhaseFailed(event: TransitionToRentalPhaseFailedEvent): void {
+  transitionedToBiddingPhase(event.address);
+}
+
+export function handleTransitionedToBiddingPhaseEarly(event: TransitionedToBiddingPhaseEarlyEvent): void {
+  transitionedToBiddingPhase(event.address);
 }

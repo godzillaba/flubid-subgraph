@@ -78,8 +78,8 @@ templates:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        - event: Initialized(indexed address,indexed address,indexed address,uint96,int96)
-          handler: handleInitialized
+        # - event: Initialized(indexed address,indexed address,indexed address,uint96,int96)
+        #   handler: handleInitialized
         - event: RenterChanged(indexed address,indexed address)
           handler: handleRenterChanged
         - event: NewInboundStream(indexed address,int96)
@@ -113,20 +113,24 @@ templates:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        - event: Initialized(address,address,address,uint96,int96,uint64,uint64,uint64,uint64)
-          handler: handleInitialized
-        # - event: Paused()
-        #   handler: handlePaused
-        # - event: Unpaused()
-        #   handler: handleUnpaused
-        # - event: RenterChanged(indexed address,indexed address)
-        #   handler: handleRenterChanged
-        # - event: NewInboundStream(indexed address,int96)
-        #   handler: handleNewInboundStream
-        # - event: StreamUpdated(indexed address,int96)
-        #   handler: handleStreamUpdated
-        # - event: StreamTerminated(indexed address)
-        #   handler: handleStreamTerminated
+        # - event: Initialized(address,address,address,uint96,int96,uint64,uint64,uint64,uint64)
+        #   handler: handleInitialized
+        - event: Paused(indexed address,int96)
+          handler: handlePaused
+        - event: Unpaused()
+          handler: handleUnpaused
+        - event: NewTopBid(indexed address,int96)
+          handler: handleNewTopBid
+        - event: DepositClaimed(indexed address,uint256)
+          handler: handleDepositClaimed
+        - event: TransitionedToRentalPhase(indexed address,int96)
+          handler: handleTransitionedToRentalPhase
+        - event: TransitionedToBiddingPhase()
+          handler: handleTransitionedToBiddingPhase
+        - event: TransitionToRentalPhaseFailed(indexed address,int96)
+          handler: handleTransitionToRentalPhaseFailed
+        - event: TransitionedToBiddingPhaseEarly(indexed address,int96)
+          handler: handleTransitionedToBiddingPhaseEarly
 
   - name: IERC721Metadata
     kind: ethereum/contract

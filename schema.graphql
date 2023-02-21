@@ -85,6 +85,14 @@ type EnglishRentalAuction @entity(immutable: false) {
 
   # English specific non constants
   # todo phase info
+  topBidder: Bytes! # address
+  depositClaimed: Boolean!
+  isBiddingPhase: Boolean!
+
+  currentPhaseEndTime: BigInt!
+  
+  # when bidding phase, generic top bid is the top bid, when renting phase, it is the rent
+
 }
 
 type ERC721ControllerObserver @entity(immutable: false) {
@@ -110,6 +118,7 @@ type GenericRentalAuction @entity(immutable: false) {
   address: Bytes! # address
 
   ## Constants
+  controllerObserver: ERC721ControllerObserver!
   controllerObserverImplementation: Bytes! # address
   # controllerObserver: Bytes! # address
 
@@ -120,10 +129,7 @@ type GenericRentalAuction @entity(immutable: false) {
 
   ## non constants
   topBid: BigInt!
-  currentRenter: Bytes!
-
-  controllerObserver: ERC721ControllerObserver!
-
+  currentRenter: Bytes! # address
   paused: Boolean!
 
   ## controller related stuff

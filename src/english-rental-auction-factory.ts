@@ -43,6 +43,10 @@ export function handleEnglishRentalAuctionDeployed(
   continuousRentalAuctionEntity.maxRentalDuration = auctionContract.maxRentalDuration();
   continuousRentalAuctionEntity.biddingPhaseDuration = auctionContract.biddingPhaseDuration();
   continuousRentalAuctionEntity.biddingPhaseExtensionDuration = auctionContract.biddingPhaseExtensionDuration();
+  continuousRentalAuctionEntity.topBidder = Address.fromHexString("0x0000000000000000000000000000000000000000");
+  continuousRentalAuctionEntity.depositClaimed = false;
+  continuousRentalAuctionEntity.isBiddingPhase = true;
+  continuousRentalAuctionEntity.currentPhaseEndTime = BigInt.fromI32(0);
   
   // GenericRentalAuction
   const genericRentalAuctionEntity = new GenericRentalAuction(
