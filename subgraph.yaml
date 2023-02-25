@@ -6,8 +6,8 @@ dataSources:
     name: ContinuousRentalAuctionFactory
     network: mumbai
     source:
-      address: "0xaB0d45639Bc816ff79A02B73a81bb6fc1d6678A1"
       abi: ContinuousRentalAuctionFactory
+      address: "0xaB0d45639Bc816ff79A02B73a81bb6fc1d6678A1"
       startBlock: 32386913
     mapping:
       kind: ethereum/events
@@ -25,16 +25,16 @@ dataSources:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        - event: ContinuousRentalAuctionDeployed(indexed address,indexed address,indexed address)
+        - event: ContinuousRentalAuctionDeployed(indexed address,indexed address,indexed
+            address)
           handler: handleContinuousRentalAuctionDeployed
       file: ./src/continuous-rental-auction-factory.ts
-
   - kind: ethereum
     name: EnglishRentalAuctionFactory
     network: mumbai
     source:
-      address: "0xD3345F3924789Da02645607C9B07f68836292361"
       abi: EnglishRentalAuctionFactory
+      address: "0xD3345F3924789Da02645607C9B07f68836292361"
       startBlock: 32386913
     mapping:
       kind: ethereum/events
@@ -52,11 +52,10 @@ dataSources:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        - event: EnglishRentalAuctionDeployed(indexed address,indexed address,indexed address)
+        - event: EnglishRentalAuctionDeployed(indexed address,indexed address,indexed
+            address)
           handler: handleEnglishRentalAuctionDeployed
       file: ./src/english-rental-auction-factory.ts
-
-
 templates:
   - name: ContinuousRentalAuction
     kind: ethereum/contract
@@ -78,8 +77,6 @@ templates:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        # - event: Initialized(indexed address,indexed address,indexed address,uint96,int96)
-        #   handler: handleInitialized
         - event: RenterChanged(indexed address,indexed address)
           handler: handleRenterChanged
         - event: NewInboundStream(indexed address,int96)
@@ -92,7 +89,6 @@ templates:
           handler: handlePaused
         - event: Unpaused()
           handler: handleUnpaused
-
   - name: EnglishRentalAuction
     kind: ethereum/contract
     network: mumbai
@@ -113,8 +109,6 @@ templates:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
       eventHandlers:
-        # - event: Initialized(address,address,address,uint96,int96,uint64,uint64,uint64,uint64)
-        #   handler: handleInitialized
         - event: Paused(indexed address,int96)
           handler: handlePaused
         - event: Unpaused()
@@ -131,7 +125,6 @@ templates:
           handler: handleTransitionToRentalPhaseFailed
         - event: TransitionedToBiddingPhaseEarly(indexed address,int96)
           handler: handleTransitionedToBiddingPhaseEarly
-
   - name: IERC721Metadata
     kind: ethereum/contract
     network: mumbai
@@ -147,7 +140,6 @@ templates:
       abis:
         - name: IERC721Metadata
           file: ./abis/IERC721Metadata.json
-  
   - name: ERC721ControllerObserver
     kind: ethereum/contract
     network: mumbai

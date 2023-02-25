@@ -1,7 +1,12 @@
 {
-  "goerli": {
+  "mumbai": {
     "ContinuousRentalAuctionFactory": {
-      "address": "0xDE82012B72fD98A76c6f920b44537D3B5EB0728D"
+      "address": "0xaB0d45639Bc816ff79A02B73a81bb6fc1d6678A1",
+      "startBlock": 32386913
+    },
+    "EnglishRentalAuctionFactory": {
+      "address": "0xD3345F3924789Da02645607C9B07f68836292361",
+      "startBlock": 32386913
     }
   }
 }
