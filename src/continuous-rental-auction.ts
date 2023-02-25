@@ -64,7 +64,7 @@ export function handleNewInboundStream(event: NewInboundStreamEvent): void {
   const streamId = createRandomId("Stream", event.transaction.hash, event.logIndex);
   const stream = new Stream(streamId);
   stream.flowRate = event.params.flowRate;
-  stream.sender = event.params.streamer;
+  stream.sender = event.params.sender;
   stream.receiver = event.address;
   stream.save();
 
@@ -79,7 +79,7 @@ export function handleNewInboundStream(event: NewInboundStreamEvent): void {
   const streamHistoryId = createRandomId("StreamHistory", event.transaction.hash, event.logIndex);;
   const streamHistoryEntity = new StreamHistory(streamHistoryId);
   streamHistoryEntity.operation = "create";
-  streamHistoryEntity.sender = event.params.streamer;
+  streamHistoryEntity.sender = event.params.sender;
   streamHistoryEntity.flowRate = event.params.flowRate;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
@@ -98,7 +98,7 @@ export function handleStreamUpdated(event: StreamUpdatedEvent): void {
     const streamEntity = Stream.load(streamId);
     if (streamEntity === null) return;
 
-    if (streamEntity.sender == event.params.streamer) {
+    if (streamEntity.sender == event.params.sender) {
       streamEntity.flowRate = event.params.flowRate;
       streamEntity.save();
     }
@@ -108,7 +108,7 @@ export function handleStreamUpdated(event: StreamUpdatedEvent): void {
   const streamHistoryId = createRandomId("StreamHistory", event.transaction.hash, event.logIndex);;
   const streamHistoryEntity = new StreamHistory(streamHistoryId);
   streamHistoryEntity.operation = "update";
-  streamHistoryEntity.sender = event.params.streamer;
+  streamHistoryEntity.sender = event.params.sender;
   streamHistoryEntity.flowRate = event.params.flowRate;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
@@ -124,7 +124,7 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
     const streamEntity = Stream.load(inboundStreams[i]);
     if (streamEntity === null) return;
     
-    if (streamEntity.sender != event.params.streamer) {
+    if (streamEntity.sender != event.params.sender) {
       // entity.inboundStreams = inboundStreams.splice(i, 1);
       // store.remove("Stream", streamEntity.id.toHexString());
       newInboundStreams.push(inboundStreams[i]);
@@ -139,7 +139,7 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
   const streamHistoryId = createRandomId("StreamHistory", event.transaction.hash, event.logIndex);
   const streamHistoryEntity = new StreamHistory(streamHistoryId);
   streamHistoryEntity.operation = "delete";
-  streamHistoryEntity.sender = event.params.streamer;
+  streamHistoryEntity.sender = event.params.sender;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
 }
@@ -149,12 +149,17 @@ export function handlePaused(event: PausedEvent): void {
   const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
   if (genericEntity === null) return;
   genericEntity.paused = true;
+  genericEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
   genericEntity.save();
 }
 
 export function handleUnpaused(event: UnpausedEvent): void {
   const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
   if (genericEntity === null) return;
+
+  const contract = ContinuousRentalAuctionContract.bind(event.address);
+
   genericEntity.paused = false;
+  genericEntity.currentRenter = contract.currentRenter();
   genericEntity.save();
 }

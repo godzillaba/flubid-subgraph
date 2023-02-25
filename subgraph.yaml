@@ -6,9 +6,9 @@ dataSources:
     name: ContinuousRentalAuctionFactory
     network: mumbai
     source:
-      address: "0x862E55E8ab6CD3cf914Cd889e22C142BD7faD15f"
+      address: "0x68757A4b7E9B295c0F80f3a9D5d2e28E0427Bd33"
       abi: ContinuousRentalAuctionFactory
-      startBlock: 31700000
+      startBlock: 32386913
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -33,9 +33,9 @@ dataSources:
     name: EnglishRentalAuctionFactory
     network: mumbai
     source:
-      address: "0x9d2E6d5511851EE77D423415162F3e1c1CDE3df1"
+      address: "0x49906452839Ca14Ba7B51e8c3159183809EabACC"
       abi: EnglishRentalAuctionFactory
-      startBlock: 31700000
+      startBlock: 32386913
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
