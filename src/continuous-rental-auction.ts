@@ -52,6 +52,7 @@ export function handleRenterChanged(event: RenterChangedEvent): void {
   if (genericEntity === null) return;
   genericEntity.currentRenter = event.params.newRenter;
   genericEntity.topBid = contract.senderInfo(event.params.newRenter).getFlowRate();
+  genericEntity.lastInteractionTimestamp = event.block.timestamp;
   genericEntity.save();
 }
 export function handleNewInboundStream(event: NewInboundStreamEvent): void {
@@ -83,14 +84,17 @@ export function handleNewInboundStream(event: NewInboundStreamEvent): void {
   streamHistoryEntity.flowRate = event.params.flowRate;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
+
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  genericEntity!.lastInteractionTimestamp = event.block.timestamp;
+  genericEntity!.save();
 }
 
 export function handleStreamUpdated(event: StreamUpdatedEvent): void {
   const entity = ContinuousRentalAuction.load(createIdFromAddress("ContinuousRentalAuction", event.address));
-  if (entity === null) return;
 
   // find the stream in the inboundStreams array to update
-  let inboundStreams = entity.inboundStreams;
+  let inboundStreams = entity!.inboundStreams;
 
   for (let i = 0; i < inboundStreams.length; i++) {
     const streamId = inboundStreams[i];
@@ -112,12 +116,15 @@ export function handleStreamUpdated(event: StreamUpdatedEvent): void {
   streamHistoryEntity.flowRate = event.params.flowRate;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
+
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  genericEntity!.lastInteractionTimestamp = event.block.timestamp;
+  genericEntity!.save();
 }
 export function handleStreamTerminated(event: StreamTerminatedEvent): void {
   const entity = ContinuousRentalAuction.load(createIdFromAddress("ContinuousRentalAuction", event.address));
-  if (entity === null) return;
 
-  const inboundStreams = entity.inboundStreams;
+  const inboundStreams = entity!.inboundStreams;
   const newInboundStreams: Bytes[] = [];
 
   for (let i = 0; i < inboundStreams.length; i++) {
@@ -131,9 +138,9 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
     }
   }
 
-  entity.inboundStreams = newInboundStreams;
+  entity!.inboundStreams = newInboundStreams;
 
-  entity.save();
+  entity!.save();
 
   // stream history
   const streamHistoryId = createRandomId("StreamHistory", event.transaction.hash, event.logIndex);
@@ -142,24 +149,28 @@ export function handleStreamTerminated(event: StreamTerminatedEvent): void {
   streamHistoryEntity.sender = event.params.sender;
   streamHistoryEntity.receiver = event.address;
   streamHistoryEntity.save();
+
+  const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
+  genericEntity!.lastInteractionTimestamp = event.block.timestamp;
+  genericEntity!.save();
 }
 
 
 export function handlePaused(event: PausedEvent): void {
   const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
-  if (genericEntity === null) return;
-  genericEntity.paused = true;
-  genericEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
-  genericEntity.save();
+  genericEntity!.paused = true;
+  genericEntity!.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
+  genericEntity!.lastInteractionTimestamp = event.block.timestamp;
+  genericEntity!.save();
 }
 
 export function handleUnpaused(event: UnpausedEvent): void {
   const genericEntity = GenericRentalAuction.load(createIdFromAddress("GenericRentalAuction", event.address));
-  if (genericEntity === null) return;
 
   const contract = ContinuousRentalAuctionContract.bind(event.address);
 
-  genericEntity.paused = false;
-  genericEntity.currentRenter = contract.currentRenter();
-  genericEntity.save();
+  genericEntity!.paused = false;
+  genericEntity!.currentRenter = contract.currentRenter();
+  genericEntity!.lastInteractionTimestamp = event.block.timestamp;
+  genericEntity!.save();
 }

@@ -132,6 +132,8 @@ type GenericRentalAuction @entity(immutable: false) {
   currentRenter: Bytes! # address
   paused: Boolean!
 
+  lastInteractionTimestamp: BigInt!
+
   ## controller related stuff
   # underlyingTokenContract: Bytes
   # underlyingTokenID: BigInt

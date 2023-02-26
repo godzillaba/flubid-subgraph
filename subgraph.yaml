@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: ContinuousRentalAuctionFactory
-    network: goerli
+    network: mumbai
     source:
       abi: ContinuousRentalAuctionFactory
-      address: "0x041F369897Af6bFFf9d96F056756c11efd512557"
-      startBlock: 8555634
+      address: "0xaB0d45639Bc816ff79A02B73a81bb6fc1d6678A1"
+      startBlock: 32386913
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -31,11 +31,11 @@ dataSources:
       file: ./src/continuous-rental-auction-factory.ts
   - kind: ethereum
     name: EnglishRentalAuctionFactory
-    network: goerli
+    network: mumbai
     source:
       abi: EnglishRentalAuctionFactory
-      address: "0xdeb68b4Cad98FB5a507a8480fE095D69F0558096"
-      startBlock: 8555634
+      address: "0xD3345F3924789Da02645607C9B07f68836292361"
+      startBlock: 32386913
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -59,7 +59,7 @@ dataSources:
 templates:
   - name: ContinuousRentalAuction
     kind: ethereum/contract
-    network: goerli
+    network: mumbai
     source:
       abi: ContinuousRentalAuction
     mapping:
@@ -91,7 +91,7 @@ templates:
           handler: handleUnpaused
   - name: EnglishRentalAuction
     kind: ethereum/contract
-    network: goerli
+    network: mumbai
     source:
       abi: EnglishRentalAuction
     mapping:
@@ -127,7 +127,7 @@ templates:
           handler: handleTransitionedToBiddingPhaseEarly
   - name: IERC721Metadata
     kind: ethereum/contract
-    network: goerli
+    network: mumbai
     source:
       abi: IERC721Metadata
     mapping:
@@ -142,7 +142,7 @@ templates:
           file: ./abis/IERC721Metadata.json
   - name: ERC721ControllerObserver
     kind: ethereum/contract
-    network: goerli
+    network: mumbai
     source:
       abi: ERC721ControllerObserver
     mapping:

@@ -54,6 +54,7 @@ export function handleContinuousRentalAuctionDeployed(
   genericRentalAuctionEntity.topBid = BigInt.fromI32(0);
   genericRentalAuctionEntity.currentRenter = Address.fromHexString("0x0000000000000000000000000000000000000000");
   genericRentalAuctionEntity.paused = auctionContract.paused();
+  genericRentalAuctionEntity.lastInteractionTimestamp = event.block.timestamp;
   
   // ERC721ControllerObserver
   ERC721ControllerObserverTemplate.create(event.params.controllerObserverAddress);
