@@ -1,21 +1,21 @@
 {
   "mumbai": {
     "ContinuousRentalAuctionFactory": {
-      "address": "0xaB0d45639Bc816ff79A02B73a81bb6fc1d6678A1",
+      "address": "0xc5B94b533cd07ae93B4d1B9c3f9347B48696FCc6",
       "startBlock": 32386913
     },
     "EnglishRentalAuctionFactory": {
-      "address": "0xD3345F3924789Da02645607C9B07f68836292361",
+      "address": "0x378847436D018985b9208103f0812ADe012dA68b",
       "startBlock": 32386913
     }
   },
   "goerli": {
     "ContinuousRentalAuctionFactory": {
-      "address": "0x041F369897Af6bFFf9d96F056756c11efd512557",
+      "address": "0x39CF2634775a20742E52b371316498e153100EEE",
       "startBlock": 8555634
     },
     "EnglishRentalAuctionFactory": {
-      "address": "0xdeb68b4Cad98FB5a507a8480fE095D69F0558096",
+      "address": "0xC846345198E94f3389048d9Fc32412C4a2D1DE91",
       "startBlock": 8555634
     }
   }
