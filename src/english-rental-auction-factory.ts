@@ -6,7 +6,7 @@ import { EnglishRentalAuction as EnglishRentalAuctionTemplate } from "../generat
 import { ERC721ControllerObserver as ERC721ControllerObserverTemplate } from "../generated/templates";
 
 import { EnglishRentalAuction, ERC721ControllerObserver, GenericRentalAuction } from "../generated/schema";
-import { createIdFromAddress } from "./helpers";
+import { createIdFromAddress, isSupportedControllerImplementation } from "./helpers";
 import {
   EnglishRentalAuction as EnglishRentalAuctionContract
 } from "../generated/templates/EnglishRentalAuction/EnglishRentalAuction"
@@ -27,6 +27,9 @@ export function handleEnglishRentalAuctionDeployed(
   // make EnglishRentalAuction
   // make GenericRentalAuction
   // make ERC721ControllerObserver
+  
+  // make sure the controller observer is supported
+  if (!isSupportedControllerImplementation(event.params.controllerObserverImplementation)) return;
 
   // create contract objects
   const auctionContract = EnglishRentalAuctionContract.bind(event.params.auctionAddress);
@@ -76,9 +79,9 @@ export function handleEnglishRentalAuctionDeployed(
   erc721ControllerObserverEntity.underlyingTokenContract = controllerContract.underlyingTokenContract();
   erc721ControllerObserverEntity.underlyingTokenID = controllerContract.underlyingTokenID();
   const nameCall = tokenContract.try_name();
-  erc721ControllerObserverEntity.underlyingTokenName = nameCall.reverted ? "unknown" : nameCall.value;
+  erc721ControllerObserverEntity.underlyingTokenName = nameCall.reverted ? "" : nameCall.value;
   const tokenURICall = tokenContract.try_tokenURI(controllerContract.underlyingTokenID());
-  erc721ControllerObserverEntity.underlyingTokenURI = tokenURICall.reverted ? "unknown" : tokenURICall.value;
+  erc721ControllerObserverEntity.underlyingTokenURI = tokenURICall.reverted ? "" : tokenURICall.value;
   erc721ControllerObserverEntity.owner = controllerContract.owner();
   erc721ControllerObserverEntity.genericRentalAuction = createIdFromAddress("GenericRentalAuction", event.params.auctionAddress);
 
